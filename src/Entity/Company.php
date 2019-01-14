@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Entity;
+
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ApiResource()
+ * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
+ * @ApiPlatform\Core\Annotation\ApiResource
+ */
+class Company
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $ParentCompanyId;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getParentCompanyId(): ?int
+    {
+        return $this->ParentCompanyId;
+    }
+
+    public function setParentCompanyId(?int $ParentCompanyId): self
+    {
+        $this->ParentCompanyId = $ParentCompanyId;
+
+        return $this;
+    }
+}
