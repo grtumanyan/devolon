@@ -1,10 +1,10 @@
-<img src="https://d1pwix07io15pr.cloudfront.net/vc71be9d739/images/logos/header-logo.svg">
+<p align="center"><img src="https://d1pwix07io15pr.cloudfront.net/vc71be9d739/images/logos/header-logo.svg"></p>
 
 Creating this application includes using Api Platform which is REST and GraphQL framework to build modern API-driven projects.
 
-Installation
+Documentation
 ------------
 
-* [Visit Api Platform][1] website.
+* [Visit Api Platform website.][1]
 
 [1]: https://api-platform.com/
