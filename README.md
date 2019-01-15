@@ -6,5 +6,7 @@ Documentation
 ------------
 
 * [Visit Api Platform website.][1]
+* [Visit Symfony website.][2]
 
 [1]: https://api-platform.com/
+[2]: https://symfony.com/
