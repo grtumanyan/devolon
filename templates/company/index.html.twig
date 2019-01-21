@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %}<title>Companies</title>{% endblock %}
+
+    {% block body %}
+
+        {% for item in companies %}
+            <div class="col-sm-3" >
+                <h1>name: {{ item.name }}, parentId: {{ item.ParentCompanyId }}</h1>
+                <hr>
+            </div>
+        {% endfor %}
+
+    {% endblock %}

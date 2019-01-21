@@ -6,7 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource
  * @ORM\Entity(repositoryClass="App\Repository\StationRepository")
  */
 class Station
@@ -37,6 +37,12 @@ class Station
      * @ORM\Column(type="integer")
      */
     private $companyId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="stations", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $company;
 
     public function getId(): ?int
     {
@@ -87,6 +93,18 @@ class Station
     public function setCompanyId(int $companyId): self
     {
         $this->companyId = $companyId;
+
+        return $this;
+    }
+
+    public function getCompany(): ?company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?company $company): self
+    {
+        $this->company = $company;
 
         return $this;
     }
