@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Company;
 use App\Entity\Station;
 use App\Service\Station as StationService;
+use App\Service\Company as CompanyService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -37,23 +38,26 @@ class CompanyController extends Controller
      *     }
      *   )
      * @param Company $data
+     * @param CompanyService $cs
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function getList(Company $data) {
+    public function getList(Company $data, CompanyService $cs) {
 
         $companies = $this->getDoctrine()
             ->getRepository(Company::class)
-            ->findByParentId([$data->getId()], ['id'=>'DESC']);
+            ->findAll([], ['id'=>'DESC']);
 
-        $result = [];
-        foreach($companies as $company){
-            $stations = $this->getDoctrine()
-                ->getRepository(Station::class)
-                ->findByCompanyId([$company->getId()], ['id'=>'DESC']);
-            if($stations != null){
-                $result[$company->getId()] = $stations;
-            }
+        $new = [];
+        foreach ($companies as $item){
+            array_push($new, ['companyId'=>$item->getId(), 'parentCompanyId'=>$item->getParentCompanyId()]);
         }
+
+        $children = $cs->buildTree($new, $data->getId());
+        $result['companyId'] = $data->getId();
+        $result['children'] = $children;
+        $result['stations'] = $this->getDoctrine()
+            ->getRepository(Station::class)
+            ->findByCompanyId([$data->getId()], ['id'=>'DESC']);
 
         return $this->json([
             'result' => $result,

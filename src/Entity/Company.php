@@ -50,7 +50,7 @@ class Company
     private $name;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $ParentCompanyId;
 

@@ -2,23 +2,42 @@
 
 namespace App\Service;
 
-use App\Entity\Company as C;
-use App\Entity\Station as S;
+use App\Repository\StationRepository;
 
 class Company
 {
+    protected $stationRepository;
 
-    public function __construct()
-    {}
+    public function __construct(StationRepository $stationRepository)
+    {
+        $this->stationRepository = $stationRepository;
+    }
 
     /**
-     * @param C $company
+     * @param $companies
+     * @param int $parentId
+     * @return array
      */
-    public function getAllStationsBasedOnCompany(C $company)
+    public function buildTree($companies, $parentId = 0)
     {
-        $result = $this->getDoctrine()
-            ->getRepository(S::class)
-            ->findByCompanyId([$company->getId()], ['id'=>'DESC']);
-        var_dump($result);exit;
+        $branch = array();
+
+        foreach ($companies as $company) {
+            if ($company['parentCompanyId'] == $parentId) {
+                $children = $this->buildTree($companies, $company['companyId']);
+                if ($children) {
+                    $company['children'] = $children;
+                    $stations = $this->stationRepository
+                        ->findByCompanyId([$company['companyId']], ['id'=>'DESC']);
+                    if($stations){
+                        $company['stations'] = $stations;
+                    }
+                }
+                unset($company['parentCompanyId']);
+                $branch[] = $company;
+            }
+        }
+
+        return $branch;
     }
 }
