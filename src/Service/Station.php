@@ -2,23 +2,25 @@
 
 namespace App\Service;
 
-use App\Entity\Company as C;
-use App\Entity\Station as S;
 
 class Station
 {
-
-    public function __construct()
-    {}
-
-    /**
-     * @param C $company
-     */
-    public function getAllStationsBasedOnCompany(C $company)
+    public function calculateDistance(
+        $latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo)
     {
-        $result = $this->getDoctrine()
-            ->getRepository(S::class)
-            ->findByCompanyId([$company->getId()], ['id'=>'DESC']);
-        var_dump($result);exit;
+        $distance =( 6371 * acos((cos(deg2rad($latitudeFrom)) ) * (cos(deg2rad($latitudeTo))) * (cos(deg2rad($longitudeFrom) - deg2rad($longitudeTo)) )+ ((sin(deg2rad($latitudeTo))) * (sin(deg2rad($latitudeFrom))))) );
+
+        return $distance;
+    }
+
+    public function orderStations($stations)
+    {
+        usort($stations, array($this,'sortByDistance'));
+
+        return $stations;
+    }
+
+    private static function sortByDistance($x, $y) {
+        return $x['distance'] - $y['distance'];
     }
 }

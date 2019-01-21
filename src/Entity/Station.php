@@ -6,7 +6,43 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource
+ * @ApiResource(
+ *   itemOperations={
+ *      "get"={"method"="GET"},
+ *      "put"={"method"="PUT"},
+ *      "delete"={"method"="DELETE"},
+ *      "getList"={
+ *        "route_name"="get_stations_by_radius",
+ *        "swagger_context" = {
+ *          "parameters" = {
+ *            {
+ *              "name" = "latitude",
+*               "in" = "path",
+ *              "required" = "true",
+ *              "type" = "string"
+ *            },
+*              {
+ *              "name" = "longitude",
+ *              "in" = "path",
+ *              "required" = "true",
+ *              "type" = "string"
+ *            },
+*              {
+ *              "name" = "kilometers",
+ *              "in" = "path",
+ *              "required" = "true",
+ *              "type" = "string"
+ *            }
+ *          },
+ *          "responses" = {
+ *            "200" = {
+ *              "description" = "The list of Stations by radius of n kilometers from a point (latitude, longitude) ordered by distance"
+ *            }
+ *          }
+ *        }
+ *      }
+ *   }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\StationRepository")
  */
 class Station
