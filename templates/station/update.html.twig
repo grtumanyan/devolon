@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+{% block title %}Update Station{% endblock %}
+
+    {% block body %}
+
+        <!-- FORM  -->
+        <div class="col-md-12">
+
+            <form class="form-horizontal" method="POST" action="{{ url('update_station_second') }}">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend>Update Station</legend>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="station-name">Name</label>
+                        <div class="col-md-4">
+                            <input id="station-name" name="station-name" type="text" value="{{ station.name }}" class="form-control input-md">
+                            <span class="help-block">Full name of your station</span>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="station-latitude">Latitude</label>
+                        <div class="col-md-4">
+                            <input id="station-latitude" name="station-latitude" type="text" value="{{ station.latitude }}" class="form-control input-md">
+                            <span class="help-block">Latitude of your station</span>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="station-longitude">Longitude</label>
+                        <div class="col-md-4">
+                            <input id="station-longitude" name="station-longitude" type="text" value="{{ station.longitude }}" class="form-control input-md">
+                            <span class="help-block">Longitude of your station</span>
+                        </div>
+                    </div>
+
+                    <!-- Prepended text-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="client-email">CompanyId</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">id</span>
+                                <input id="station-companyId" name="station-companyId" class="form-control" value="{{ station.companyId }}" type="number">
+                            </div>
+                            <p class="help-block">ID of your station's company</p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="station-id" value="{{ station.id }}">
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="btn-save"></label>
+                        <div class="col-md-4">
+                            <button id="btn-save" name="btn-save" class="btn btn-success">Update</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+
+        </div>
+
+    {% endblock %}

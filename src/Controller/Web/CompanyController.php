@@ -3,9 +3,6 @@
 namespace App\Controller\Web;
 
 use App\Entity\Company;
-use App\Entity\Station;
-use App\Service\Station as StationService;
-use App\Service\Company as CompanyService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -231,7 +228,7 @@ class CompanyController extends Controller
         $response = curl_exec($curl);
         $response = json_decode($response);
         curl_close($curl);
-        
+
         return $this->redirectToRoute('companies');
     }
 }

@@ -84,13 +84,12 @@
         </div>
 
         <div class=col-md-12>
-
-        </div>
             <legend>Result</legend>
             {% if result is defined %}
-                    {{  dump(result) }}
+                {{  dump(result) }}
             {% else %}
                 <p>Nothing to show</p>
             {% endif %}
+        </div>
         <br>
     {% endblock %}

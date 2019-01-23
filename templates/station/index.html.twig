@@ -6,7 +6,7 @@
         <!-- FORM  -->
         <div class="col-md-12">
 
-            <form class="form-horizontal" id="form-edit-station">
+            <form class="form-horizontal" method="POST" action="{{ url('add_station') }}">
                 <fieldset>
 
                     <!-- Form Name -->
@@ -99,9 +99,9 @@
                             <td>{{ item.longitude }}</td>
                             <td>{{ item.companyId }}</td>
                             <td>
-                                <a title="view this user" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-eye-open text-primary"></i> </a>
-                                <a title="edit this user" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                                <a title="delete this user" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                                <a href="{{ url('view_station',{'id': item.id}) }}" title="view this item" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-eye-open text-primary"></i> </a>
+                                <a href="{{ url('update_station_first',{'id': item.id}) }}" title="edit this item" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                                <a href="{{ url('delete_station',{'id': item.id}) }}" title="delete this item" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -111,6 +111,14 @@
 
         </div>
 
+        <div class=col-md-12>
+            <legend>Result</legend>
+            {% if result is defined %}
+                {{  dump(result) }}
+            {% else %}
+                <p>Nothing to show</p>
+            {% endif %}
+        </div>
 
         <br>
 

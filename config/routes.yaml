@@ -37,14 +37,25 @@ add_station:
     path: /addstation
     controller: App\Controller\Web\StationController::add
 view_station:
-    path: /viewstation
+    path: /viewstation/{id}
     controller: App\Controller\Web\StationController::view
+    defaults:
+            id: 1
 view_all_stations:
     path: /viewallstations
     controller: App\Controller\Web\StationController::viewAll
 delete_station:
-    path: /deletestation
+    path: /deletestation/{id}
     controller: App\Controller\Web\StationController::delete
-update_station:
-    path: /updatestation
-    controller: App\Controller\Web\StationController::update
+    defaults:
+            id: 1
+update_station_first:
+    path: /updatestation/{id}
+    controller: App\Controller\Web\StationController::updateFirst
+    defaults:
+            id: 1
+update_station_second:
+  path: /updatestationsecond/{id}
+  controller: App\Controller\Web\StationController::updateSecond
+  defaults:
+          id: 1
