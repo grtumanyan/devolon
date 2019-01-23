@@ -1,13 +1,96 @@
 {% extends 'base.html.twig' %}
-{% block title %}<title>Companies</title>{% endblock %}
+{% block title %}Companies{% endblock %}
 
     {% block body %}
 
-        {% for item in companies %}
-            <div class="col-sm-3" >
-                <h1>name: {{ item.name }}, parentId: {{ item.ParentCompanyId }}</h1>
-                <hr>
-            </div>
-        {% endfor %}
+        <!-- FORM  -->
+        <div class="col-md-12">
 
+            <form class="form-horizontal" method="POST" action="{{ url('add_company') }}">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend>Companies</legend>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="company-name">Name</label>
+                        <div class="col-md-4">
+                            <input id="company-name" name="company-name" type="text" placeholder="your company's name" class="form-control input-md">
+                            <span class="help-block">Full name of your company</span>
+                        </div>
+                    </div>
+
+                    <!-- Prepended text-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="client-email">ParentId</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">id</span>
+                                <input id="company-parentId" name="company-parentId" class="form-control" placeholder="YourCompanyParentId" type="number">
+                            </div>
+                            <p class="help-block">ID of your company's parent company</p>
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="btn-save"></label>
+                        <div class="col-md-4">
+                            <button id="btn-save" name="btn-save" class="btn btn-success">Add</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+
+        </div>
+
+
+
+
+        <!-- LIST -->
+        <div class=col-md-12>
+
+            <form id="form-list-client">
+                <legend>List of companies</legend>
+
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                    <tr>
+                        <td>Name</td>
+                        <th>ParentId</th>
+                        <th>Actions</th>
+                    </tr>
+
+                    </thead>
+                    <tbody id="form-list-client-body">
+                    {% for item in companies %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.ParentCompanyId }}</td>
+                            <td>
+                                <a href="{{ url('view_company',{'id': item.id}) }}" title="view this item" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-eye-open text-primary"></i> </a>
+                                <a href="{{ url('update_company_first',{'id': item.id}) }}" title="edit this item" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                                <a href="{{ url('delete_company',{'id': item.id}) }}" title="delete this item" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+
+        </div>
+
+        <div class=col-md-12>
+
+        </div>
+            <legend>Result</legend>
+            {% if result is defined %}
+                    {{  dump(result) }}
+            {% else %}
+                <p>Nothing to show</p>
+            {% endif %}
+        <br>
     {% endblock %}

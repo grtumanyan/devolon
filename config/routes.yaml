@@ -1,3 +1,50 @@
-company:
-    path: /company/
-    controller: App\Controller\CompanyController::index
+welcome:
+    path: /
+    controller: App\Controller\WelcomeController::index
+companies:
+    path: /companies
+    controller: App\Controller\Web\CompanyController::index
+add_company:
+    path: /addcompany
+    controller: App\Controller\Web\CompanyController::add
+view_company:
+    path: /viewcompany/{id}
+    controller: App\Controller\Web\CompanyController::view
+    defaults:
+            id: 1
+view_all_companies:
+    path: /viewallcompanies
+    controller: App\Controller\Web\CompanyController::viewAll
+delete_company:
+    path: /deletecompany/{id}
+    controller: App\Controller\Web\CompanyController::delete
+    defaults:
+            id: 1
+update_company_first:
+    path: /updatecompanyfirst/{id}
+    controller: App\Controller\Web\CompanyController::updateFirst
+    defaults:
+            id: 1
+update_company_second:
+    path: /updatecompanysecond/{id}
+    controller: App\Controller\Web\CompanyController::updateSecond
+    defaults:
+            id: 1
+stations:
+    path: /stations
+    controller: App\Controller\Web\StationController::index
+add_station:
+    path: /addstation
+    controller: App\Controller\Web\StationController::add
+view_station:
+    path: /viewstation
+    controller: App\Controller\Web\StationController::view
+view_all_stations:
+    path: /viewallstations
+    controller: App\Controller\Web\StationController::viewAll
+delete_station:
+    path: /deletestation
+    controller: App\Controller\Web\StationController::delete
+update_station:
+    path: /updatestation
+    controller: App\Controller\Web\StationController::update

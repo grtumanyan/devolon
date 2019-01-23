@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block title %}Update Company{% endblock %}
+
+    {% block body %}
+
+        <!-- FORM  -->
+        <div class="col-md-12">
+
+            <form class="form-horizontal" method="POST" action="{{ url('update_company_second') }}">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend>Update Company</legend>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="company-name">Name</label>
+                        <div class="col-md-4">
+                            <input id="company-name" name="company-name" type="text" value="{{ company.name }}" class="form-control input-md">
+                            <span class="help-block">Full name of your company</span>
+                        </div>
+                    </div>
+
+                    <!-- Prepended text-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="client-email">ParentId</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">id</span>
+                                <input id="company-parentId" name="company-parentId" class="form-control" value="{{ company.ParentCompanyId }}" type="number">
+                            </div>
+                            <p class="help-block">ID of your company's parent company</p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="company-id" value="{{ company.id }}">
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="btn-save"></label>
+                        <div class="col-md-4">
+                            <button id="btn-save" name="btn-save" class="btn btn-success">Update</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+
+        </div>
+
+    {% endblock %}

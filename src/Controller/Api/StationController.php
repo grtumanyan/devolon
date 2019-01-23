@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use App\Entity\Station;
 use App\Entity\Company;
@@ -12,20 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class StationController extends Controller
 {
-    /**
-     * @Route("/index", name="index")
-     */
-    public function index()
-    {
-        $stations = $this->getDoctrine()
-            ->getRepository(Station::class)
-            ->findAll();
-
-        return $this->render('station/index.html.twig', [
-            'stations' => $stations
-        ]);
-    }
-
     /**
      * @Route(
      *     name="get_stations_by_radius",
