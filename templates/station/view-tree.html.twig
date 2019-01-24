@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block title %}Stations{% endblock %}
+
+    {% block body %}
+
+        <!-- FORM  -->
+        <div class="col-md-12">
+
+            <form class="form-horizontal" method="POST" action="{{ url('viewtree') }}">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend>Stations</legend>
+
+                    <!-- Prepended text-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="client-email">CompanyId</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">id</span>
+                                <input id="company-id" name="company-id" class="form-control" placeholder="YourCompanyId" type="text">
+                            </div>
+                            <p class="help-block">ID of your stations's company</p>
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="btn-save"></label>
+                        <div class="col-md-4">
+                            <button id="btn-save" name="btn-save" class="btn btn-success">Search</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+
+        </div>
+
+        <div class=col-md-12>
+            <legend>Result</legend>
+            {% if result is defined %}
+                {{  dump(result) }}
+            {% else %}
+                <p>Nothing to show</p>
+            {% endif %}
+        </div>
+
+        <br>
+
+    {% endblock %}

@@ -7,26 +7,17 @@
             <legend>Custom Endpoints</legend>
             <a href="{{ url('view_all_stations_by_distance') }}" title="view by distance" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-eye-open text-primary"></i> View by Distance</a>
             <a href="{{ url('view_all_stations_by_company_id') }}" title="view tree by company id" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-eye-open text-primary"></i> View tree by company id</a>
-        <br><br>
+            <br><br>
         </div>
 
         <!-- FORM  -->
         <div class="col-md-12">
 
-            <form class="form-horizontal" method="POST" action="{{ url('add_station') }}">
+            <form class="form-horizontal" method="POST" action="{{ url('viewdistance') }}">
                 <fieldset>
 
                     <!-- Form Name -->
                     <legend>Stations</legend>
-
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="station-name">Name</label>
-                        <div class="col-md-4">
-                            <input id="station-name" name="station-name" type="text" placeholder="your station's name" class="form-control input-md">
-                            <span class="help-block">Full name of your station</span>
-                        </div>
-                    </div>
 
                     <!-- Prepended text-->
                     <div class="form-group">
@@ -54,13 +45,13 @@
 
                     <!-- Prepended text-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="client-email">CompanyId</label>
+                        <label class="col-md-4 control-label" for="client-email">Distance</label>
                         <div class="col-md-4">
                             <div class="input-group">
-                                <span class="input-group-addon">id</span>
-                                <input id="company-id" name="company-id" class="form-control" placeholder="YourCompanyId" type="text">
+                                <span class="input-group-addon">Distance</span>
+                                <input id="station-id" name="station-distance" class="form-control" placeholder="Distance" type="text">
                             </div>
-                            <p class="help-block">ID of your stations's company</p>
+                            <p class="help-block">Distance</p>
                         </div>
                     </div>
 
@@ -68,53 +59,13 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="btn-save"></label>
                         <div class="col-md-4">
-                            <button id="btn-save" name="btn-save" class="btn btn-success">Add</button>
+                            <button id="btn-save" name="btn-save" class="btn btn-success">Search</button>
                         </div>
                     </div>
 
                 </fieldset>
             </form>
 
-
-        </div>
-
-
-
-
-        <!-- LIST -->
-        <div class=col-md-12>
-
-            <form id="form-list-client">
-                <legend>List of stations</legend>
-
-                <table class="table table-bordered table-condensed table-hover">
-                    <thead>
-                    <tr>
-                        <td>Name</td>
-                        <th>Latitude</th>
-                        <th>Longitude</th>
-                        <th>CompanyId</th>
-                        <th>Actions</th>
-                    </tr>
-
-                    </thead>
-                    <tbody id="form-list-client-body">
-                    {% for item in stations %}
-                        <tr>
-                            <td>{{ item.name }}</td>
-                            <td>{{ item.latitude }}</td>
-                            <td>{{ item.longitude }}</td>
-                            <td>{{ item.companyId }}</td>
-                            <td>
-                                <a href="{{ url('view_station',{'id': item.id}) }}" title="view this item" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-eye-open text-primary"></i> </a>
-                                <a href="{{ url('update_station_first',{'id': item.id}) }}" title="edit this item" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                                <a href="{{ url('delete_station',{'id': item.id}) }}" title="delete this item" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </form>
 
         </div>
 

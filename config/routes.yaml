@@ -59,3 +59,9 @@ update_station_second:
   controller: App\Controller\Web\StationController::updateSecond
   defaults:
           id: 1
+view_all_stations_by_distance:
+    path: /viewdistance
+    controller: App\Controller\Web\StationController::viewDistance
+view_all_stations_by_company_id:
+    path: /viewtree
+    controller: App\Controller\Web\StationController::viewTree

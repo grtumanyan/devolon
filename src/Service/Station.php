@@ -5,8 +5,7 @@ namespace App\Service;
 
 class Station
 {
-    public function calculateDistance(
-        $latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo)
+    public function calculateDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo)
     {
         $distance =( 6371 * acos((cos(deg2rad($latitudeFrom)) ) * (cos(deg2rad($latitudeTo))) * (cos(deg2rad($longitudeFrom) - deg2rad($longitudeTo)) )+ ((sin(deg2rad($latitudeTo))) * (sin(deg2rad($latitudeFrom))))) );
 

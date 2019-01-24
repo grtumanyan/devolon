@@ -231,7 +231,84 @@ class StationController extends Controller
         $response = curl_exec($curl);
         $response = json_decode($response);
         curl_close($curl);
-        
+
         return $this->redirectToRoute('stations');
+    }
+
+    /**
+     * @Route("/viewdistance", name="viewdistance")
+     * @param Request $request
+     * @return Response
+     */
+    public function viewDistance(Request $request)
+    {
+        $latitude = $request->request->get('station-latitude', '0');
+        $longitude = $request->request->get('station-longitude', '0');
+        $distance = $request->request->get('station-distance', 1);
+
+        $url = $this->generateUrl('get_stations_by_radius', ['latitude' => $latitude, 'longitude'=>$longitude, 'kilometers'=>$distance]);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://localhost".$url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => "",
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "cache-control: no-cache"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        return $this->render('station/view-distance.html.twig', [
+            'result' => $response
+        ]);
+    }
+
+    /**
+     * @Route("/viewtree", name="viewtree")
+     * @param Request $request
+     * @return Response
+     */
+    public function viewTree(Request $request)
+    {
+        $id = $request->request->get('company-id', -1);
+        if($id == -1){
+            return $this->render('station/view-tree.html.twig');
+        }
+
+        $url = $this->generateUrl('get_stations_by_company', ['id' => $id]);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://localhost".$url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => "",
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "cache-control: no-cache"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        return $this->render('station/view-tree.html.twig', [
+            'result' => $response
+        ]);
     }
 }
